@@ -1,0 +1,10 @@
+-- Select Statement
+
+	SELECT * FROM employees;
+or
+	SELECT * FROM classicmodels.employees;
+
+*************************
+classicmodels 	: Schema Name
+employees 	: Table Name
+* 		: Will provide all columns & rows from the table

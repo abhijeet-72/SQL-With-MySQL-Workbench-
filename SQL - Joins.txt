@@ -1,0 +1,131 @@
+-- --------------------------------------------------------
+## Joining Multiple Tables (orders, customers & employees)
+-- --------------------------------------------------------
+
+SELECT  o.customerNumber, orderNumber, o.status,
+        c.customerName, c.country, c.salesRepEmployeeNumber AS EmployeeNumber,
+        e.jobTitle, e.firstName,e.lastName
+FROM orders o
+JOIN customers c
+ON o.customerNumber = c.customerNumber
+JOIN employees e
+ON c.salesRepEmployeeNumber = e.employeeNumber
+ORDER BY employeeNumber;
+
+-- --------------------------------------------------------
+## Self Join (To find out who reports to whom ?)
+-- --------------------------------------------------------
+
+SELECT * FROM employees;
+
+SELECT  emp.employeeNumber, emp.firstName, emp.lastName, emp.jobTitle,
+		mgr.firstName, mgr.lastName, mgr.jobTitle, mgr.employeeNumber
+FROM employees emp
+JOIN employees mgr
+ON emp.reportsTo = mgr.employeeNumber;
+
+-- --------------------------------------------------------
+## Implicit Join (Joining 2 tables without writing JOIN)
+-- --------------------------------------------------------
+
+# Query Using Normal Inner Join Method
+SELECT  p.customerNumber, p.checkNumber, p.amount, 
+		c.customerName, c.salesRepEmployeeNumber 
+FROM payments p 
+INNER JOIN customers c 
+ON p.customerNumber = c.customerNumber;
+
+
+# Query Using Implicit Join Method
+SELECT  p.customerNumber, p.checkNumber, p.amount,
+		c.customerName, c.salesRepEmployeeNumber
+FROM payments p, customers c
+WHERE p.customerNumber = c.customerNumber;
+
+-- --------------------------------------------------------
+## Outer Join (Left Join & Right Join)
+-- --------------------------------------------------------
+
+-- LEFT JOIN
+/*  While joining 2 tables 1 table considered as LEFT & other is as RIGHT
+	In the example below customers table considered as LEFT & orders table as RIGHT
+    So, in LEFT JOIN all values or rows or entries from LEFT table are mainted as it is.
+*/
+--
+SELECT c.customerNumber, c.customerName, o.orderNumber
+FROM customers c
+LEFT JOIN orders o
+ON c.customerNumber = o.customerNumber;
+
+-- RIGHT JOIN
+/*  While joining 2 tables 1 table considered as LEFT & other is as RIGHT
+	In the example below customers table considered as LEFT & employees table as RIGHT
+    So, in RIGHT JOIN all values or rows or entries from RIGHT table are mainted as it is.
+*/
+
+SELECT  c.customerNumber, c.customerName, c.salesRepEmployeeNumber, 
+		e.employeeNumber, e.jobTitle
+FROM customers c
+RIGHT JOIN employees e
+ON c.salesRepEmployeeNumber = e.employeeNumber;
+
+-- --------------------------------------------------------
+## Subquery (Subquery within Main Query)
+-- --------------------------------------------------------
+
+/*  Line number 79, 80,81 represents Main Query
+	Line number 82 shows Subquery
+    We can relate customers & orders table using column customerNumber
+    If we observe both tables we can see few customers hasn't placed any order
+    So, we can use Subquery to find out those customerNumbers.
+    Main Query provides customer numbers who hasn't placed any order
+    Subquery provides customers number who placed order or orders
+    DISTINCT gives UNIQUE values only from generated result
+*/
+
+SELECT customerNumber, customerName, salesRepEmployeeNumber
+FROM customers c
+WHERE customerNumber NOT IN (
+	SELECT DISTINCT customerNumber FROM orders o
+);
+
+-- --------------------------------------------------------
+## Self Outer Join (To find out who reports to whom ?)
+-- --------------------------------------------------------
+
+SELECT  emp.employeeNumber, emp.lastName, emp.firstName, emp.jobTitle, 
+		mgr.firstName, mgr.jobTitle
+FROM employees emp
+LEFT JOIN employees mgr
+ON emp.reportsTo = mgr.employeeNumber;
+
+-- --------------------------------------------------------
+## Using Clause
+-- --------------------------------------------------------
+
+/*  Normally in JOIN we use ON to define the join between 2 tables
+	When we use USING Clause we replace ON by USING & mention common column name in ()
+    USING Clause can be ONLY used in cases where column name is same in both tables
+    In example below we can remove LEFT & ORDER BY (It is included just for neat result)
+*/
+SELECT c.customerNumber, c.customerName, o.orderNumber, o.status
+FROM customers c
+LEFT JOIN orders o
+USING (customerNumber)
+ORDER BY customerNumber;
+
+-- --------------------------------------------------------
+## NATURAL JOIN
+-- --------------------------------------------------------
+
+/*  NATURAL JOIN itself identifies the common column & produce the result
+	It is not recommanded as we are not sure where the join made
+    We will have no control over JOIN
+	Sometimes we will get unexpected results
+*/
+
+SELECT c.customerNumber, c.customerName, o.orderNumber, o.status
+FROM customers c
+NATURAL JOIN orders o;
+
+

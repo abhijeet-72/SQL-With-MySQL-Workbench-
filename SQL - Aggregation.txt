@@ -19,3 +19,33 @@ COUNT(*) AS totalRows,					-- Provides total number of rows in table
 COUNT(requiredDate) AS totalOrders,		-- Provides total non NULL row count
 COUNT(shippedDate) AS shippedOrders 	-- Provides total non NULL row count
 FROM orders;
+
+SELECT
+COUNT(*) AS totalOrders
+FROM orders
+WHERE status = 'In Process';
+
+SELECT 
+MAX(paymentDate) AS recentPayment,	-- MAX function can be applied on Date
+MIN(paymentDate) AS oldestPayent,	-- MIN function can be applied on Date
+MAX(checkNumber) AS recentCheck,	-- MAX function can be applied on STRING
+MIN(checkNumber) AS oldestCheck		-- MIN function can be applied on STRING
+FROM payments;
+
+-- --------------------------------
+## GROUP BY CLAUSE
+-- --------------------------------
+
+SELECT							-- We can count total number of lines in table
+COUNT(*) AS totalLines
+FROM products;
+
+SELECT DISTINCT productLine 	-- We can count total UNIQUE ProductLines in table
+FROM products;
+
+SELECT  productLine, 			-- We can count total products for each ProductLines
+		COUNT(*) AS cnt 
+FROM products 
+GROUP BY productLine;
+
+

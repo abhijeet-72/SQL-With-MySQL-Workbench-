@@ -1,0 +1,21 @@
+-- ----------------------------
+## AGGREGATION Functions
+-- ----------------------------
+
+/*	Aggregation Functions take multiple inputs & provide Aggregate or Single result
+	MIN(), MAX(), AVG(), SUM() & COUNT() these are the Aggregation Functions
+*/
+
+SELECT 
+MAX(amount) AS maxVal,
+MIN(amount) AS minVal,
+AVG(amount) AS avgVal,
+SUM(amount) AS totalVal,
+COUNT(*) AS amountRows
+FROM payments;
+
+SELECT
+COUNT(*) AS totalRows,					-- Provides total number of rows in table
+COUNT(requiredDate) AS totalOrders,		-- Provides total non NULL row count
+COUNT(shippedDate) AS shippedOrders 	-- Provides total non NULL row count
+FROM orders;

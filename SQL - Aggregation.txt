@@ -49,3 +49,15 @@ FROM products
 GROUP BY productLine;
 
 
+
+-- Count employees working in same office, also show officeCode, city & country
+
+SELECT 
+e.officeCode, o.city, o.country,
+COUNT(employeeNumber) AS empCount
+FROM employees e
+JOIN offices o
+ON e.officeCode = o.officeCode
+GROUP BY officeCode;
+
+

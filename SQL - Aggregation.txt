@@ -15,8 +15,8 @@ COUNT(*) AS amountRows
 FROM payments;
 
 SELECT
-COUNT(*) AS totalRows,					-- Provides total number of rows in table
-COUNT(requiredDate) AS totalOrders,		-- Provides total non NULL row count
+COUNT(*) AS totalRows,			-- Provides total number of rows in table
+COUNT(requiredDate) AS totalOrders,	-- Provides total non NULL row count
 COUNT(shippedDate) AS shippedOrders 	-- Provides total non NULL row count
 FROM orders;
 
@@ -36,11 +36,11 @@ FROM payments;
 ## GROUP BY CLAUSE
 -- --------------------------------
 
-SELECT							-- We can count total number of lines in table
+SELECT					-- We can count total number of lines in table
 COUNT(*) AS totalLines
 FROM products;
 
-SELECT DISTINCT productLine 	-- We can count total UNIQUE ProductLines in table
+SELECT DISTINCT productLine 		-- We can count total UNIQUE ProductLines in table
 FROM products;
 
 SELECT  productLine, 			-- We can count total products for each ProductLines
@@ -59,5 +59,27 @@ FROM employees e
 JOIN offices o
 ON e.officeCode = o.officeCode
 GROUP BY officeCode;
+
+-- ------------------------------------
+## HAVING Clause
+-- ------------------------------------
+/*
+    HAVING Clause can be used ONLY AFTER GROUP BY Clause, on the columns created by GROUP BY Clause
+    We can't use WHERE Clause here, as WHERE Clause works ONLY with columns in Original Table 
+    not on columns created because of GROUP BY Clause (Because of Query Execution Sequence)
+*/
+-- Count employees working in same office (more than 4), show corresponding officeCode, city, country 
+
+SELECT o.officeCode, COUNT(e.employeeNumber) AS employeeCnt, o.city, o.country 
+FROM employees e
+JOIN offices o
+USING (officeCode) 
+GROUP BY officeCode 
+HAVING employeecnt > 4;
+
+/*
+    Order of Excution :
+    FROM --> WHERE --> GROUP BY --> HAVING --> SELECT --> DISTINCT --> ORDER BY --> LIMIT
+*/
 
 

@@ -1,0 +1,11 @@
+-- -------------------------------
+## Exercise File
+-- -------------------------------
+-- Total Payments from each customer after a certain date
+
+SELECT
+customerNumber,
+SUM(amount)
+FROM payments
+JOIN customers USING (customerNumber)
+GROUP BY customerNumber;

@@ -9,3 +9,19 @@ SUM(amount)
 FROM payments
 JOIN customers USING (customerNumber)
 GROUP BY customerNumber;
+
+-- Show the employee names in ascending order, who were working from more than 10 months in company & having salary more than $2000 per month (Use Employee table)
+
+/* 
+    employee ID  : int
+    name         : varchar (25)
+    months       : int
+    salary       : int
+    
+    month represents employee working in organization in months
+    salary represents per month salary drawn by employee
+*/
+
+SELECT name FROM Employee
+WHERE months > 10 AND salary > 2000
+ORDER BY name;

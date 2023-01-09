@@ -25,3 +25,15 @@ GROUP BY customerNumber;
 SELECT name FROM Employee
 WHERE months > 10 AND salary > 2000
 ORDER BY name;
+
+-- Provide the total credit limit of customer from customers table for sales representtive number 1164
+/*
+    customerNumber : int
+    firstName : varchar (25)
+    lastName : varchar (25)
+    postalCode : int
+    salesRepNum : int
+    creditLimit : float
+*/
+
+SELECT SUM(creditLimit) FROM customers WHERE salesRepNum = 1164;

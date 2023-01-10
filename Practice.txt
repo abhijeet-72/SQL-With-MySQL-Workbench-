@@ -37,3 +37,15 @@ ORDER BY name;
 */
 
 SELECT SUM(creditLimit) FROM customers WHERE salesRepNum = 1164;
+
+
+-- Provide the sum of all city polpulations for California district using City table
+/*
+    City : varchar (25)
+    Country : varchar (25)
+    District : varchar (25)
+    Population : int
+    Code : int
+*/
+
+SELECT SUM(Population) FROM City WHERE District = 'California';

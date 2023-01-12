@@ -75,3 +75,28 @@ JOIN COUNTRY Cn
 ON Ct.COUNTRYCODE = Cn.CODE
 WHERE CONTINENT = 'Asia';
 
+-- Query the name of all cities, ONLY from Africa Continent 
+-- CITY & COUNTRY table provided (COUNTRYCODE from CITY table & CODE from COUNTRY table are matching columns) :
+
+/*
+            CITY
+    ID          : int
+    NAME        : varchar (25)
+    COUNTRYCODE : varchar (25)
+    DISTRICT    : varchar (25)
+    POPULATION  : int
+    
+            COUNTRY
+    CODE        : varchar (25)
+    NAME        : varchar (25)
+    CONTINENT   : varchar (25)
+    AREA        : int
+    INDEPYEAR   : int
+*/
+
+SELECT Ct.Name
+FROM CITY Ct
+JOIN COUNTRY Cn
+ON Ct.COUNTRYCODE = Cn.CODE
+WHERE CONTINENT = 'Africa';
+

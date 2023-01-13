@@ -100,3 +100,15 @@ JOIN COUNTRY Cn
 ON Ct.COUNTRYCODE = Cn.CODE
 WHERE CONTINENT = 'Africa';
 
+-- Query the count of cities from CITY table for population more than 100000.
+
+/*
+            CITY
+    ID          : int
+    NAME        : varchar (25)
+    COUNTRYCODE : varchar (25)
+    DISTRICT    : varchar (25)
+    POPULATION  : int
+*/
+
+SELECT COUNT(*) FROM CITY WHERE POPULATION > 100000;

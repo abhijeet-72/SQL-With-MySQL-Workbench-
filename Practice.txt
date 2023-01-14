@@ -112,3 +112,19 @@ WHERE CONTINENT = 'Africa';
 */
 
 SELECT COUNT(*) FROM CITY WHERE POPULATION > 100000;
+
+-- Query the Average population of all cities within California Distict.
+
+/*
+            CITY
+    ID          : int
+    NAME        : varchar (25)
+    COUNTRYCODE : varchar (25)
+    DISTRICT    : varchar (25)
+    POPULATION  : int
+*/
+
+SELECT AVG(POPULATION) FROM CITY WHERE DISTRICT = 'California';
+
+
+

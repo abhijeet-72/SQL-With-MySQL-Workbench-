@@ -126,7 +126,7 @@ SELECT COUNT(*) FROM CITY WHERE POPULATION > 100000;
 
 SELECT AVG(POPULATION) FROM CITY WHERE DISTRICT = 'California';
 
--- Qery the maximum & minimum population of cities. 
+-- Query the maximum & minimum population of cities. 
 
 /*
             CITY
@@ -139,3 +139,15 @@ SELECT AVG(POPULATION) FROM CITY WHERE DISTRICT = 'California';
 
 SELECT (MAX(POPULATION) - MIN(POPULATION)) AS diffPop FROM CITY;
 
+-- Query the average population for all cities in CITY, rounded down to the nearest integer.
+
+/*
+            CITY
+    ID          : int
+    NAME        : varchar (25)
+    COUNTRYCODE : varchar (25)
+    DISTRICT    : varchar (25)
+    POPULATION  : int
+*/
+
+SELECT ROUND(AVG(POPULATION)) FROM CITY;

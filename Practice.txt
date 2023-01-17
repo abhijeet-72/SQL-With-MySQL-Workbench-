@@ -151,3 +151,18 @@ SELECT (MAX(POPULATION) - MIN(POPULATION)) AS diffPop FROM CITY;
 */
 
 SELECT ROUND(AVG(POPULATION)) FROM CITY;
+
+-- Query the sum of Northern Latitudes in STATION table, lattitude value must be greater than 40.2546 and less than 120.1245. 
+-- Truncate the answer to 2 decimal places. (LAT_N : Northern Lattitude & LONG_W : Western Longitude)
+
+/*
+            STATION
+    ID          : int
+    CITY        : varchar (25)
+    STATE       : varchar (25)
+    LAT_N       : float
+    LONG_W      : float
+*/
+
+SELECT ROUND((SUM(LAT_N)),4) FROM STATION WHERE LAT_IN BETWEEN 40.2546 AND 120.1245;
+

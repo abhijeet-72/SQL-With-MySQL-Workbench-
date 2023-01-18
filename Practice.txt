@@ -166,3 +166,15 @@ SELECT ROUND(AVG(POPULATION)) FROM CITY;
 
 SELECT ROUND((SUM(LAT_N)),4) FROM STATION WHERE LAT_IN BETWEEN 40.2546 AND 120.1245;
 
+Find the difference between the total number of CITY entries & the number of distinct CITY entries in the table STATION.
+
+/*
+            STATION
+    ID          : int
+    CITY        : varchar (25)
+    STATE       : varchar (25)
+    LAT_N       : float
+    LONG_W      : float
+*/
+
+SELECT ( COUNT (*) - ( COUNT ( DISTINCT CITY ) ) ) FROM STATION;
